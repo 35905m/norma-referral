@@ -7,9 +7,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:'Open Sans',sans-serif;color:#222;background:#e1e8f0;font-size:14px}
-.page{display:flex;min-height:100vh}.sidebar{width:220px;background:#fff;text-align:center;padding:58px 15px;flex-shrink:0}
+.page{display:flex;min-height:100vh}.sidebar{width:250px;background:#fff;text-align:center;padding:58px 15px;flex-shrink:0}
 .sidebar img{width:94px;height:117px;object-fit:cover;border-radius:50%}.sidebar h2{font-size:19px;font-weight:700;margin:16px 0 8px}
-.sidebar .agency{font-size:13px}.contacts{margin-top:36px}.contacts a{display:block;background:#1a90f5;color:#fff;border-radius:14px;padding:6px 8px;margin:5px auto;width:132px;font-size:10px;text-decoration:none}
+.sidebar .agency{font-size:13px}.contacts{margin-top:36px}.contacts a{display:block;background:#1a90f5;color:#fff;border-radius:14px;padding:9px 16px;margin:8px auto;width:210px;font-size:13px;white-space:nowrap;border-radius:20px;text-decoration:none}
 .content{padding:22px 28px;flex:1;max-width:584px}.card{background:#fff;padding:18px 18px 22px;margin-bottom:18px}
 .card h2{font-size:19px;font-weight:700;margin:0 0 8px}.msg{font-size:13px;line-height:1.4;margin-bottom:24px}
 .row{display:flex;gap:21px;margin-bottom:14px}.row>*{flex:1;min-width:0}
@@ -31,6 +31,8 @@ input,select{width:100%;padding:5px 9px;border:1px solid #ccc;border-radius:3px;
 <div class="card"><h2>Tell Us About You</h2>
 <div class="row"><input name="Your First Name" placeholder="Your First Name" required><input name="Your Last Name" placeholder="Your Last Name" required></div>
 <div class="row"><input type="email" name="Your Email" placeholder="Your Email" required><input type="tel" name="Your Phone Number" placeholder="Your Phone Number"></div>
+<div class="row"><input name="Your Street Address" placeholder="Your Street Address" autocomplete="street-address"></div>
+<div class="row" id="addr"><input name="Your City" placeholder="Your City" autocomplete="address-level2"><select name="Your State"><option value="">State</option></select><input name="Your ZIP" placeholder="ZIP" inputmode="numeric" pattern="\d{5}(-\d{4})?" maxlength="10" autocomplete="postal-code"></div>
 </div>
 <div class="card"><h2>Refer Your Friends or Family Members</h2>
 <div class="msg">My business is built on referrals (friends, family, co-workers). Do you know one or two people that may want better insurance?</div>
@@ -44,9 +46,8 @@ function add(){n++;var p="Referral "+n+" ",d=document.createElement("div");d.cla
 d.innerHTML=(n>1?'<a href="#" class="rm">Remove</a><div style="clear:both"></div>':'')+
 '<div class="row"><input name="'+p+'First Name" placeholder="First Name" required><input name="'+p+'Last Name" placeholder="Last Name"></div>'+
 '<div class="row"><input type="email" name="'+p+'Email" placeholder="Email"><input type="tel" name="'+p+'Phone" placeholder="Phone"></div>'+
-'<div class="row"><input name="'+p+'Street Address" placeholder="Street Address" autocomplete="street-address"></div>'+
-'<div class="row"><input name="'+p+'City" placeholder="City"><select name="'+p+'State"><option value="">State</option>'+states.map(function(s){return'<option'+(s=="TX"?'':'')+'>'+s+'</option>'}).join("")+'</select><input name="'+p+'ZIP" placeholder="ZIP" inputmode="numeric" pattern="\\d{5}(-\\d{4})?" maxlength="10"></div>';
+'';
 var rm=d.querySelector(".rm");if(rm)rm.onclick=function(e){e.preventDefault();d.remove()};
 document.getElementById("refs").appendChild(d)}
-add();document.getElementById("add").onclick=function(e){e.preventDefault();add()};
+document.querySelector('#addr select').innerHTML+=states.map(function(s){return'<option>'+s+'</option>'}).join('');add();document.getElementById("add").onclick=function(e){e.preventDefault();add()};
 </script></body></html>
